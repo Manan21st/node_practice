@@ -50,7 +50,14 @@ const http = require('http');
 
 const server = http.createServer((req,res) => {
     res.setHeader('Content-Type', 'text/html');
-    if (req.url === '/login') {
+    if (req.url === '/index') {
+        const filePath = path.join(__dirname, 'index.html');
+        fs.readFile(filePath, (err, data) => {
+            res.write(data);
+            res.end();
+        });
+    }
+    else if (req.url === '/login') {
         res.write('<html><head><title>Login Page</title></head>');
         res.write('<body><h1>Login Page</h1></body></html>');
     }else{
